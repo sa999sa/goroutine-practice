@@ -1,7 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 func main() {
-	fmt.Println("")
+	var wg sync.WaitGroup
+	sayHello := func() {
+		defer wg.Done()
+		fmt.Println("hello")
+	}
+	wg.Add(1)
+	go sayHello()
+	wg.Wait()
+	//fmt.Println("")
 }
+
+/*func sayHello() {
+	fmt.Println("Hello")
+}*/
